@@ -7,6 +7,17 @@ int randint(int minvalue, int maxvalue)
 
 int main(int argc, char* argv[])
 {
+    //Command line args
+    int i;
+    int ascii = 0;
+    for (i = 0; i < argc; i++)
+    {
+        if (strcmp(argv[i], "--ascii") == 0)
+        {
+            ascii = 1;
+        }
+    }
+
 	//Seed the RNG
 	char *username;
     #if (defined (_WIN32) || defined (_WIN64))
@@ -17,7 +28,6 @@ int main(int argc, char* argv[])
 
     int *tmp = calloc(strlen(username), sizeof(int));
 
-    int i;
     for (i = 0; i < strlen(username); i++)
     {
         tmp[i] = username[i] - '0';
@@ -57,7 +67,7 @@ int main(int argc, char* argv[])
 		char *buffer_dices = (char *)calloc(10, sizeof(char));
 		int individual_dice[21];
 		int faces, dices;
-		int i, j, k, l, m, result;
+		int j, k, l, m, result;
 
         for (i = 1; i < argc; i++)
 		{
@@ -111,34 +121,73 @@ int main(int argc, char* argv[])
 
 			if ((faces == 6) && (dices == 1))
             {
-                d6(result);
+                if (ascii)
+                    d6(result);
 
                 if (result == dices)
-                    printf("CRITICAL FAILURE ! You rolled a %d...", result);
+                {
+                    #if (defined (LINUX) || defined (__linux__))
+                        printf("\e[91m\e[1mCRITICAL FAILURE ! \e[21mYou rolled a %d...\e[0m", result);
+                    #else
+                        printf("CRITICAL FAILURE ! You rolled a %d...", result);
+                    #endif
+                }
                 else if (result == dices * faces)
-                    printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
+                {
+                    #if (defined (LINUX) || defined (__linux__))
+                        printf("\e[92m\e[1mCRTITICAL SUCCESS !! \e[21mYou rolled a %d !\e[0m", result);
+                    #else
+                        printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
+                    #endif
+                }
                 else
                     printf("You rolled a %d !", result);
             }
 			else if ((faces == 20) && (dices == 1))
             {
-                d20(result);
+                if (ascii)
+                    d20(result);
 
                 if (result == dices)
-                    printf("CRITICAL FAILURE ! You rolled a %d...", result);
+                {
+                    #if (defined (LINUX) || defined (__linux__))
+                        printf("\e[91m\e[1mCRITICAL FAILURE ! \e[21mYou rolled a %d...\e[0m", result);
+                    #else
+                        printf("CRITICAL FAILURE ! You rolled a %d...", result);
+                    #endif
+                }
                 else if (result == dices * faces)
-                    printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
+                {
+                    #if (defined (LINUX) || defined (__linux__))
+                        printf("\e[92m\e[1mCRTITICAL SUCCESS !! \e[21mYou rolled a %d !\e[0m", result);
+                    #else
+                        printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
+                    #endif
+                }
                 else
                     printf("You rolled a %d !", result);
             }
             else
             {
-                printf("%s: ", argv[i]);
+                if (dices >= 2)
+                    printf("%s: ", argv[i]);
 
                 if (result == dices)
-                    printf("CRITICAL FAILURE ! You rolled a %d...", result);
+                {
+                    #if (defined (LINUX) || defined (__linux__))
+                        printf("\e[91m\e[1mCRITICAL FAILURE ! \e[21mYou rolled a %d...\e[0m", result);
+                    #else
+                        printf("CRITICAL FAILURE ! You rolled a %d...", result);
+                    #endif
+                }
                 else if (result == dices * faces)
-                    printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
+                {
+                    #if (defined (LINUX) || defined (__linux__))
+                        printf("\e[92m\e[1mCRTITICAL SUCCESS !! \e[21mYou rolled a %d !\e[0m", result);
+                    #else
+                        printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
+                    #endif
+                }
                 else
                     printf("You rolled a %d !", result);
 
