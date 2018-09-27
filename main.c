@@ -21,8 +21,10 @@ int main(int argc, char* argv[])
 	//Seed the RNG
 	char *username;
     #if (defined (_WIN32) || defined (_WIN64))
+        username = calloc(strlen(getenv("USERNAME")), sizeof(char));
         username = getenv("USERNAME");
     #elif (defined (LINUX) || defined (__linux__))
+        username = calloc(strlen(getenv("USER")), sizeof(char));
         username = getenv("USER");
     #endif
 
@@ -50,8 +52,8 @@ int main(int argc, char* argv[])
             seed += (time(NULL) * hash) * 10/100;
     }
 
-    //free(username);
     free(tmp);
+    username, tmp = NULL;
     srand(seed);
 
     if ((argc < 2) || (argv[1][0] == '?'))
