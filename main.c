@@ -127,7 +127,7 @@ int main(int argc, char* argv[])
                 if (result == dices)
                 {
                     #if (defined (LINUX) || defined (__linux__))
-                        printf("\e[91m\e[1mCRITICAL FAILURE ! \e[21mYou rolled a %d...\e[0m", result);
+                        printf("\e[1;91mCRITICAL FAILURE ! \e[21;91mYou rolled a %d...\e[0m", result);
                     #else
                         printf("CRITICAL FAILURE ! You rolled a %d...", result);
                     #endif
@@ -135,7 +135,7 @@ int main(int argc, char* argv[])
                 else if (result == dices * faces)
                 {
                     #if (defined (LINUX) || defined (__linux__))
-                        printf("\e[92m\e[1mCRTITICAL SUCCESS !! \e[21mYou rolled a %d !\e[0m", result);
+                        printf("\e[1;92mCRTITICAL SUCCESS !! \e[21;92mYou rolled a %d !\e[0m", result);
                     #else
                         printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
                     #endif
@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
                 if (result == dices)
                 {
                     #if (defined (LINUX) || defined (__linux__))
-                        printf("\e[91m\e[1mCRITICAL FAILURE ! \e[21mYou rolled a %d...\e[0m", result);
+                        printf("\e[1;91mCRITICAL FAILURE ! \e[21;91mYou rolled a %d...\e[0m", result);
                     #else
                         printf("CRITICAL FAILURE ! You rolled a %d...", result);
                     #endif
@@ -159,7 +159,7 @@ int main(int argc, char* argv[])
                 else if (result == dices * faces)
                 {
                     #if (defined (LINUX) || defined (__linux__))
-                        printf("\e[92m\e[1mCRTITICAL SUCCESS !! \e[21mYou rolled a %d !\e[0m", result);
+                        printf("\e[1;92mCRTITICAL SUCCESS !! \e[21;92mYou rolled a %d !\e[0m", result);
                     #else
                         printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
                     #endif
@@ -175,7 +175,7 @@ int main(int argc, char* argv[])
                 if (result == dices)
                 {
                     #if (defined (LINUX) || defined (__linux__))
-                        printf("\e[91m\e[1mCRITICAL FAILURE ! \e[21mYou rolled a %d...\e[0m", result);
+                        printf("\e[1;91mCRITICAL FAILURE ! \e[21;91mYou rolled a %d...\e[0m", result);
                     #else
                         printf("CRITICAL FAILURE ! You rolled a %d...", result);
                     #endif
@@ -183,7 +183,7 @@ int main(int argc, char* argv[])
                 else if (result == dices * faces)
                 {
                     #if (defined (LINUX) || defined (__linux__))
-                        printf("\e[92m\e[1mCRTITICAL SUCCESS !! \e[21mYou rolled a %d !\e[0m", result);
+                        printf("\e[1;92mCRTITICAL SUCCESS !! \e[21;92mYou rolled a %d !\e[0m", result);
                     #else
                         printf("CRTITICAL SUCCESS !! You rolled a %d !", result);
                     #endif
