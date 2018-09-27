@@ -1,3 +1,5 @@
+#include "dice.h"
+
 void d6(int result)
 {
     switch (result)
@@ -165,33 +167,35 @@ void d6(int result)
         printf("+mMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm+\n");
         break;
     }
+    printf("\n");
 }
 
 void d20(int result)
 {
-    printf("                       .++.                       \n");
-    printf("                    :smNMMNms:                    \n");
-    printf("                `/yNdo- NN -odNy/`                \n");
-    printf("             -odNy/`    NN    `/yNdo-             \n");
-    printf("         `/yNdo-        NN        -omNy/`         \n");
-    printf("      -odNy/.       ``..NN..``       .+hNdo-      \n");
-    printf("    yNMMMddmmmNNNNmmmmdMMMMdmmmmNNNNmmmddMMMNy    \n");
-    printf("    MMy....``         oMyyMo         ``....yMM    \n");
-    printf("    MMM-             yM+  oMy             -MMM    \n");
-    printf("    MmmN.          `hM/    /Mh`          .NmmM    \n");
-    printf("    Mh-Md         .mN-      :Nm.        `dN-hM    \n");
-    printf("    Mh /My       -Nm.        .mN-       yM/ hM    \n");
-    printf("    Mh  sM+     :Nd`    %d    `dN:     +Ms  hM    \n", result);
-    printf("    Mh   hM:   +My             `hM+   :Mh   hM    \n");
-    printf("    Mh   `mN. sMo                sMs .Nm`   hM    \n");
-    printf("    Mh    -NmhM+                  +MhmN.    hM    \n");
-    printf("    Mh   `:hMMNhhhhhhhhhhhhhhhhhhhhNMMh-`   hM    \n");
-    printf("    Mm+ymNds+mMy------------------yMm+sdNmy+mM    \n");
-    printf("    mMMd-     oMh.              .hMo     -dMMd    \n");
-    printf("     .+hNh+.   .hMo            oMh.   .odNy/`     \n");
-    printf("         :smms:` /Nm:        :mN/ `:smms:         \n");
-    printf("            .+hNh+-sMy`    `yMs-+hNh+.            \n");
-    printf("               `:smmdMN+  +NMdmms:                \n");
-    printf("                   .+hMMddMMh+.                   \n");
-    printf("                      `/ss:`                      \n");
+    printf("                   .++.                   \n");
+    printf("                :smNMMNms:                \n");
+    printf("            `/yNdo- NN -odNy/`            \n");
+    printf("         -odNy/`    NN    `/yNdo-         \n");
+    printf("     `/yNdo-        NN        -omNy/`     \n");
+    printf("  -odNy/.       ``..NN..``       .+hNdo-  \n");
+    printf("yNMMMddmmmNNNNmmmmdMMMMdmmmmNNNNmmmddMMMNy\n");
+    printf("MMy....``         oMyyMo         ``....yMM\n");
+    printf("MMM-             yM+  oMy             -MMM\n");
+    printf("MmmN.          `hM/    /Mh`          .NmmM\n");
+    printf("Mh-Md         .mN-      :Nm.        `dN-hM\n");
+    printf("Mh /My       -Nm.        .mN-       yM/ hM\n");
+    printf("Mh  sM+     :Nd`    %01d    `dN:     +Ms  hM\n", result);
+    printf("Mh   hM:   +My             `hM+   :Mh   hM\n");
+    printf("Mh   `mN. sMo                sMs .Nm`   hM\n");
+    printf("Mh    -NmhM+                  +MhmN.    hM\n");
+    printf("Mh   `:hMMNhhhhhhhhhhhhhhhhhhhhNMMh-`   hM\n");
+    printf("Mm+ymNds+mMy------------------yMm+sdNmy+mM\n");
+    printf("mMMd-     oMh.              .hMo     -dMMd\n");
+    printf(" .+hNh+.   .hMo            oMh.   .odNy/` \n");
+    printf("     :smms:` /Nm:        :mN/ `:smms:     \n");
+    printf("        .+hNh+-sMy`    `yMs-+hNh+.        \n");
+    printf("           `:smmdMN+  +NMdmms:            \n");
+    printf("               .+hMMddMMh+.               \n");
+    printf("                  `/ss:`                  \n");
+    printf("\n");
 }

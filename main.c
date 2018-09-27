@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     #if (defined (_WIN32) || defined (_WIN64))
         username = getenv("USERNAME");
     #elif (defined (LINUX) || defined (__linux__))
-        username = getenv("PATH");
+        username = getenv("USER");
     #endif
 
     int *tmp = calloc(strlen(username), sizeof(int));
