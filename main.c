@@ -8,10 +8,27 @@ int randint(int minvalue, int maxvalue)
 int main(int argc, char* argv[])
 {
 	//Seed the RNG
-    char username[30];
-    strcpy(username, getenv("USERNAME"));
-    char *ptr;
-    unsigned int hash = strtoul(username, &ptr, 36);
+	char *username;
+    #if (defined (_WIN32) || defined (_WIN64))
+        username = getenv("USERNAME");
+    #elif (defined (LINUX) || defined (__linux__))
+        username = getenv("PATH");
+    #endif
+
+    int *tmp = calloc(strlen(username), sizeof(int));
+
+    int i;
+    for (i = 0; i < strlen(username); i++)
+    {
+        tmp[i] = username[i] - '0';
+    }
+
+    unsigned int hash = 0;
+    for (i = 0; i < strlen(username); i++)
+    {
+        hash += tmp[i];
+    }
+
     unsigned int seed = time(NULL);
 
     if ((seed % 3 == 0) || (seed % 7 == 0))
@@ -23,6 +40,8 @@ int main(int argc, char* argv[])
             seed += (time(NULL) * hash) * 10/100;
     }
 
+    //free(username);
+    free(tmp);
     srand(seed);
 
     if ((argc < 2) || (argv[1][0] == '?'))
@@ -34,7 +53,8 @@ int main(int argc, char* argv[])
     }
     else
     {
-		char buffer_faces[10], buffer_dices[10];
+		char *buffer_faces = (char *)calloc(10, sizeof(char));
+		char *buffer_dices = (char *)calloc(10, sizeof(char));
 		int individual_dice[21];
 		int faces, dices;
 		int i, j, k, l, m, result;
