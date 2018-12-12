@@ -8,16 +8,16 @@ int randint(int minvalue, int maxvalue)
 	//Source: https://stackoverflow.com/questions/2509679/how-to-generate-a-random-integer-number-from-within-a-range
 	
 	int r;
-    const unsigned int range = 1 + maxvalue - minvalue;
-    const unsigned int buckets = RAND_MAX / range;
-    const unsigned int limit = buckets * range;
+	const unsigned int range = 1 + maxvalue - minvalue;
+	const unsigned int buckets = RAND_MAX / range;
+	const unsigned int limit = buckets * range;
 
-    do
-    {
-        r = rand();
-    } while (r >= limit);
+	do
+	{
+	    r = rand();
+	} while (r >= limit);
 
-    return minvalue + (r / buckets);
+	return minvalue + (r / buckets);
 }
 
 int main(int argc, char* argv[])
@@ -25,51 +25,51 @@ int main(int argc, char* argv[])
 	int i;
 	//Seed the RNG
 	char *username;
-    #if (defined (_WIN32) || defined (_WIN64))
-        username = calloc(strlen(getenv("USERNAME")), sizeof(char));
-        username = getenv("USERNAME");
-    #elif (defined (LINUX) || defined (__linux__))
-        username = calloc(strlen(getenv("USER")), sizeof(char));
-        username = getenv("USER");
-    #endif
+	#if (defined (_WIN32) || defined (_WIN64))
+	    username = calloc(strlen(getenv("USERNAME")), sizeof(char));
+	    username = getenv("USERNAME");
+	#elif (defined (LINUX) || defined (__linux__))
+	    username = calloc(strlen(getenv("USER")), sizeof(char));
+	    username = getenv("USER");
+	#endif
 
-    int *tmp = calloc(strlen(username), sizeof(int));
+	int *tmp = calloc(strlen(username), sizeof(int));
 
-    for (i = 0; i < strlen(username); i++)
-    {
-        tmp[i] = username[i] - '0';
-    }
+	for (i = 0; i < strlen(username); i++)
+	{
+	    tmp[i] = username[i] - '0';
+	}
 
-    unsigned int hash = 0;
-    for (i = 0; i < strlen(username); i++)
-    {
-        hash += tmp[i];
-    }
+	unsigned int hash = 0;
+	for (i = 0; i < strlen(username); i++)
+	{
+	    hash += tmp[i];
+	}
 
-    unsigned int seed = time(NULL);
+	unsigned int seed = time(NULL);
 
-    if ((seed % 3 == 0) || (seed % 7 == 0))
-        seed += (time(NULL) * hash) * 10/100;
-    else
-    {
-        seed -= (time(NULL) * hash) * ((seed%3)*10)/100;
-        if ((seed % 3 == 0) || (seed % 7 == 0))
-            seed += (time(NULL) * hash) * 10/100;
-    }
+	if ((seed % 3 == 0) || (seed % 7 == 0))
+	    seed += (time(NULL) * hash) * 10/100;
+	else
+	{
+	    seed -= (time(NULL) * hash) * ((seed%3)*10)/100;
+	    if ((seed % 3 == 0) || (seed % 7 == 0))
+	        seed += (time(NULL) * hash) * 10/100;
+	}
 
-    free(tmp);
-    username, tmp = NULL;
-    srand(seed);
+	free(tmp);
+	username, tmp = NULL;
+	srand(seed);
 
-    if ((argc < 2) || (argv[1][0] == '?'))
-    {
-        printf("Usage: rtd <x>d<y>\n");
-        printf("    <x>: Number of dice to roll\n");
-        printf("    <y>: Number of faces on each dice\n\n");
-        printf("You can roll up to 20 dice per throw. (e.g.: 20d20, or 10d10 + 5d6 + 5d4)\n");
-    }
-    else	//Enter main loop
-    {
+	if ((argc < 2) || (argv[1][0] == '?'))
+	{
+	    printf("Usage: rtd <x>d<y>\n");
+	    printf("    <x>: Number of dice to roll\n");
+	    printf("    <y>: Number of faces on each dice\n\n");
+	    printf("You can roll up to 20 dice per throw. (e.g.: 20d20, or 10d10 + 5d6 + 5d4)\n");
+	}
+	else	//Enter main loop
+	{
 		//Check if dice expression is ok
 		for (i = 1; i < argc; i++)
 		{
@@ -381,7 +381,7 @@ int main(int argc, char* argv[])
 				}
 			}
 		}
-    }
+	}
 	
-    return 0;
+	return 0;
 }
