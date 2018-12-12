@@ -63,10 +63,10 @@ int main(int argc, char* argv[])
 
     if ((argc < 2) || (argv[1][0] == '?'))
     {
-        printf("Usage: rtd <x>d<y>\n");
+        printf("Usage: rtd <x>d<y><+/-z>\n");
         printf("    <x>: Number of dice to roll\n");
-        printf("    <y>: Number of faces on each dice\n\n");
-        printf("You can roll up to 20 dice per throw. (e.g.: 20d20, or 10d10 + 5d6 + 5d4)\n");
+        printf("    <y>: Number of faces on each dice\n");
+		printf("    <+/-z>: Optional modifier, positive or negative\n");
     }
     else	//Enter main loop
     {
