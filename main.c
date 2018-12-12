@@ -357,7 +357,7 @@ int main(int argc, char* argv[])
     								if (k != dices-1)
     									printf("%d, ", rolls[k]);
     								else
-    									printf("%d ", rolls[k]);
+    									printf("%d)", rolls[k]);
     							#elif defined (__linux__)
     								if (k != dices-1)
     								{
