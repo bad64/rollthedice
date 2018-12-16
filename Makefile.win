@@ -1,0 +1,22 @@
+CC = gcc
+LDFLAGS = -Wall
+
+rtd: lib
+	$(CC) $(LDFLAGS) -c -o rtd.o main.c
+	$(CC) $(LDFLAGS) -o bin\win32\rtd.exe -s rtd.o -Lbin\win32 -lrtd
+
+.PHONY: lib
+lib:
+	@IF EXIST bin ( cd bin\ && IF NOT EXIST win32 ( mkdir win32 ) && cd .. ) ELSE ( mkdir bin\win32 )
+	$(CC) $(LDFLAGS) -fPIC -c -o lib/librtd.o lib/rtd.c
+	$(CC) $(LDFLAGS) -s -shared -Wl,--subsystem,windows -o bin\win32\librtd.dll lib\librtd.o
+	
+.PHONY: clean
+clean:
+	@echo Removing object files (*.o)
+	@del /Q *.o lib\*.o bin\win32\*.o
+
+.PHONY: distclean
+distclean: clean
+	@echo Removing binaries in bin\win32
+	@rmdir /S /Q bin\win32
