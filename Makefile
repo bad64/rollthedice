@@ -1,5 +1,5 @@
 CC = gcc
-LDFLAGS = -Wall
+LDFLAGS = -O2 -Wall
 
 rtd: lib
 	$(CC) $(LDFLAGS) -c -o bin/linux/rtd.o main.c

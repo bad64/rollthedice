@@ -32,11 +32,18 @@
 	const unsigned int buckets = RAND_MAX / range;
 	const unsigned int limit = buckets * range;
 
-	do
-	{
-		r = rand();
-	} while (r >= limit);
-
+	#if (defined (_WIN32) || defined (_WIN64))
+		do
+		{
+			r = rand();
+		} while (r >= limit);
+	#elif (defined (LINUX) || defined (__linux__))
+		do
+		{
+			r = random();
+		} while (r >= limit);
+	#endif
+		
 	return minvalue + (r / buckets);
 }
 
@@ -46,44 +53,12 @@
 	extern char *roll(char *dice, int color)
 #endif
 {
-	int i;
 	//Seed the RNG
-	char *username;
 	#if (defined (_WIN32) || defined (_WIN64))
-		username = (char *)calloc(strlen(getenv("USERNAME")) + 1, sizeof(char));
-		strcpy(username, getenv("USERNAME"));
+		srand(time(NULL));
 	#elif (defined (LINUX) || defined (__linux__))
-		username = (char *)calloc(strlen(getenv("USER")) + 1, sizeof(char));
-		strcpy(username, getenv("USER"));
+		srandom(time(NULL));
 	#endif
-
-	int *tmp = calloc(strlen(username), sizeof(int));
-
-	for (i = 0; i < strlen(username); i++)
-	{
-		tmp[i] = username[i] - '0';
-	}
-
-	unsigned int hash = 0;
-	for (i = 0; i < strlen(username); i++)
-	{
-		hash += tmp[i];
-	}
-
-	unsigned int seed = time(NULL);
-
-	if ((seed % 3 == 0) || (seed % 7 == 0))
-		seed += (time(NULL) * hash) * 10/100;
-	else
-	{
-		seed -= (time(NULL) * hash) * ((seed%3)*10)/100;
-		if ((seed % 3 == 0) || (seed % 7 == 0))
-			seed += (time(NULL) * hash) * 10/100;
-	}
-
-	free(tmp);
-	free(username);
-	srand(seed);
 
 	if (dice[0] == '?')
 		return help();
@@ -152,8 +127,8 @@
 		else
 		{
 			buf_mod = (char *)calloc(2, sizeof(char));
-			memset(buf_mod, '\0', strlen(dice) - signchar + 1);
-			buf_mod[0] = 0;
+			memset(buf_mod, '\0', 2);
+			buf_mod[0] = '0';
 		}
 		
 		if ((dices == 0) || (faces == 0))
@@ -447,16 +422,16 @@
 			}
 			else
 			{
-				int *rolls = (int *)calloc(faces, sizeof(int));
+				int *rolls = (int *)calloc(dices, sizeof(int));
 				
-				int j;
-				for (j = 0; j < dices; j++)
+				int i;
+				for (i = 0; i < dices; i++)
 				{
-					rolls[j] = randint(1, faces);
+					rolls[i] = randint(1, faces);
 				}
 				
-				for (j = 0; j < dices; j++)
-					result += rolls[j];
+				for (i = 0; i < dices; i++)
+					result += rolls[i];
 				
 				if (result == dices)
 				{
@@ -697,15 +672,15 @@
 					s_msg += strlen(buf_result);
 					s_msg += strlen(" ! (");
 					
-					int k;
-					for (k = 0; k < dices; k++)
+					int j;
+					for (j = 0; j < dices; j++)
 					{
 						char *buf_roll = (char *) malloc(12 * sizeof(char));
 						memset (buf_roll, '\0', 12);
-						sprintf(buf_roll, "%d", rolls[k]);
+						sprintf(buf_roll, "%d", rolls[j]);
 						s_msg += strlen(buf_roll);
 						
-						if (k != dices - 1)
+						if (j != dices - 1)
 							s_msg += strlen(", ");
 						
 						free(buf_roll);
@@ -722,15 +697,15 @@
 					memset(msg, '\0', s_msg);
 					sprintf(msg, "%sd%s: You rolled a %s ! (", buf_dices, buf_faces, buf_result);
 					
-					for (k = 0; k < dices; k++)
+					for (j = 0; j < dices; j++)
 					{
 						char *buf_roll = (char *) malloc(12 * sizeof(char));
 						memset (buf_roll, '\0', 12);
-						sprintf(buf_roll, "%d", rolls[k]);
+						sprintf(buf_roll, "%d", rolls[j]);
 						
 						strcat(msg, buf_roll);
 						
-						if (k != dices -1)
+						if (j != dices -1)
 							strcat(msg, ", ");
 						
 						free(buf_roll);
