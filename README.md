@@ -1,10 +1,10 @@
-#Roll the dice !
+# Roll the dice !
 
 A super lightweight dice rolling program like you can find a lot of nowadays on Discord. Except this one is mine and written in C, as part of my experimentation on shared libraries.
 
 main.c is merely a sample program that interfaces with the library, where the *true* magic happens. The lib comes with a help screen and callable random facility ~~that I took from StackOverflow~~.
 
-#Installation
+# Installation
 
 In case you don't know how a makefile works (hey, we've all started somewhere, haven't we ?), here is the rundown:
 
