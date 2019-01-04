@@ -53,13 +53,6 @@
 	extern char *roll(char *dice, int color)
 #endif
 {
-	//Seed the RNG
-	#if (defined (_WIN32) || defined (_WIN64))
-		srand(time(NULL));
-	#elif (defined (LINUX) || defined (__linux__))
-		srandom(time(NULL));
-	#endif
-
 	if (dice[0] == '?')
 		return help();
 	else	//Enter main loop

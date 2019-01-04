@@ -20,6 +20,9 @@ int main(int argc, char* argv[])
 				color = 0;
 		}
 		
+		// Seed RNG
+		srand(time(NULL));
+		
 		//Actually look for a dice string
 		for (i = 1; i < argc; i++)
 		{
