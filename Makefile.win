@@ -1,5 +1,6 @@
 CC = gcc
 LDFLAGS = -O2 -Wall
+LIBNAME = rtd.dll
 
 rtd: lib
 	$(CC) $(LDFLAGS) -c -o rtd.o main.c
@@ -9,7 +10,7 @@ rtd: lib
 lib:
 	@IF EXIST bin ( cd bin\ && IF NOT EXIST win32 ( mkdir win32 ) && cd .. ) ELSE ( mkdir bin\win32 )
 	$(CC) $(LDFLAGS) -fPIC -c -o lib/librtd.o lib/rtd.c
-	$(CC) $(LDFLAGS) -s -shared -Wl,--subsystem,windows -o bin\win32\librtd.dll lib\librtd.o
+	$(CC) $(LDFLAGS) -s -shared -Wl,--subsystem,windows -o bin\win32\$(LIBNAME) lib\librtd.o
 	
 .PHONY: clean
 clean:

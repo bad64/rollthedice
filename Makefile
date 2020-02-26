@@ -1,5 +1,6 @@
 CC = gcc
 LDFLAGS = -O2 -Wall
+LIBNAME = librtd.so
 
 rtd: lib
 	$(CC) $(LDFLAGS) -c -o bin/linux/rtd.o main.c
@@ -9,7 +10,7 @@ rtd: lib
 lib:
 	@mkdir -p bin/linux
 	$(CC) $(LDFLAGS) -fPIC -c -o lib/librtd.o lib/rtd.c
-	$(CC) $(LDFLAGS) -s -shared -Wl,-soname,librtd.so -o bin/linux/librtd.so lib/librtd.o
+	$(CC) $(LDFLAGS) -s -shared -Wl,-soname,librtd.so -o bin/linux/$(LIBNAME) lib/librtd.o
 
 .PHONY: install
 install:
